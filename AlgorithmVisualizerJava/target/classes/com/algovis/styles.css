@@ -1,0 +1,7 @@
+.panel {
+    -fx-padding: 10;
+}
+.text-area {
+    -fx-font-family: "Consolas", "Menlo", "Monospaced";
+    -fx-font-size: 12px;
+}

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.algovis.controller.MainController">
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="Algorithms">
+                    <items>
+                        <Menu text="Sorting">
+                            <items>
+                                <MenuItem text="Bubble Sort"    onAction="#onAlgorithmBubbleSort"/>
+                                <MenuItem text="Insertion Sort" onAction="#onAlgorithmInsertionSort"/>
+                                <MenuItem text="Selection Sort" onAction="#onAlgorithmSelectionSort"/>
+                                <MenuItem text="Merge Sort"     onAction="#onAlgorithmMergeSort"/>
+                                <MenuItem text="Quick Sort"     onAction="#onAlgorithmQuickSort"/>
+                                <MenuItem text="Heap Sort"      onAction="#onAlgorithmHeapSort"/>
+                            </items>
+                        </Menu>
+                        <Menu text="Graph">
+                            <items>
+                                <MenuItem text="BFS"      onAction="#onAlgorithmBFS"/>
+                                <MenuItem text="DFS"      onAction="#onAlgorithmDFS"/>
+                                <MenuItem text="Dijkstra" onAction="#onAlgorithmDijkstra"/>
+                                <MenuItem text="A*"       onAction="#onAlgorithmAStar"/>
+                                <MenuItem text="Kruskal"  onAction="#onAlgorithmKruskal"/>
+                                <MenuItem text="Prim"     onAction="#onAlgorithmPrim"/>
+                            </items>
+                        </Menu>
+                        <Menu text="Tree">
+                            <items>
+                                <MenuItem text="BST Insert"  onAction="#onAlgorithmBSTInsert"/>
+                                <MenuItem text="BST Delete"  onAction="#onAlgorithmBSTDelete"/>
+                                <MenuItem text="Traversals"  onAction="#onAlgorithmTraversals"/>
+                                <MenuItem text="AVL Insert"  onAction="#onAlgorithmAVLInsert"/>
+                            </items>
+                        </Menu>
+                    </items>
+                </Menu>
+                <Menu text="Data">
+                    <items>
+                        <MenuItem text="Randomize Array" onAction="#onRandomizeArray"/>
+                        <!-- <MenuItem text="Presets..." onAction="#onShowPresets"/> -->
+                    </items>
+                </Menu>
+                <Menu text="View">
+                    <items>
+                        <!-- <MenuItem text="Reset Zoom" onAction="#onResetZoom"/> -->
+                        <MenuItem text="Toggle Grid" onAction="#onToggleGrid"/>
+                    </items>
+                </Menu>
+                <!-- <Menu text="Help">
+                    <items>
+                        <MenuItem text="About" onAction="#onAbout"/>
+                    </items>
+                </Menu> -->
+            </menus>
+        </MenuBar>
+    </top>
+
+    <left>
+        <TitledPane text="Dataset" collapsible="false">
+            <content>
+                <VBox spacing="8" styleClass="panel">
+                    <Label text="Array Size"/>
+                    <Slider fx:id="arraySizeSlider" min="5" max="128" value="32" blockIncrement="1" majorTickUnit="32" showTickLabels="true"/>
+                    <Button text="Randomize Array" onAction="#onRandomizeArray" maxWidth="Infinity"/>
+                    <Separator/>
+                    <Label text="Graph Presets"/>
+                    <HBox spacing="6">
+                        <Button text="Random" onAction="#onGraphRandom"/>
+                        <Button text="Grid" onAction="#onGraphGrid"/>
+                    </HBox>
+                    <Separator/>
+                    <Label text="Tree Sequence (CSV)"/>
+                    <TextField fx:id="treeCsvField" promptText="e.g., 8,3,10,1,6"/>
+                    <Button text="Load Tree" onAction="#onLoadTreeCsv" maxWidth="Infinity"/>
+                </VBox>
+            </content>
+        </TitledPane>
+    </left>
+
+    <center>
+        <StackPane>
+            <Canvas fx:id="canvas" width="800" height="600"/>
+        </StackPane>
+    </center>
+
+    <right>
+        <TabPane tabClosingPolicy="UNAVAILABLE" prefWidth="280">
+            <tabs>
+                <Tab text="Pseudocode">
+                    <content>
+                        <VBox spacing="6" styleClass="panel">
+                            <TabPane fx:id="pseudoTabs" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                    <Tab text="C++">
+                                        <content>
+                                            <TextArea fx:id="cppArea" editable="false" wrapText="true" prefRowCount="20" styleClass="text-area"/>
+                                        </content>
+                                    </Tab>
+                                    <Tab text="Python">
+                                        <content>
+                                            <TextArea fx:id="pyArea" editable="false" wrapText="true" prefRowCount="20" styleClass="text-area"/>
+                                        </content>
+                                    </Tab>
+                                </tabs>
+                            </TabPane>
+                            <TitledPane text="Complexity" expanded="true" collapsible="false">
+                                <content>
+                                    <VBox spacing="4">
+                                        <Label fx:id="bigOAvg"/>
+                                        <Label fx:id="bigOWorst"/>
+                                        <Label fx:id="spaceComplexity"/>
+                                    </VBox>
+                                </content>
+                            </TitledPane>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Metrics">
+                    <content>
+                        <VBox spacing="4" styleClass="panel">
+                            <Label fx:id="statusLabel" text="Ready." wrapText="true"/>
+                            <Label fx:id="metricsLabel" text="Step: 0"/>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </right>
+
+    <bottom>
+        <ToolBar>
+            <Button text="▶/⏸" onAction="#onPlayPause"/>
+            <Button text="Step ▶" onAction="#onStep"/>
+            <Button text="◀ Prev" onAction="#onPrev"/>
+            <Button text="⟲ Reset" onAction="#onReset"/>
+            <Separator orientation="VERTICAL"/>
+            <Label text="Speed"/>
+            <Slider fx:id="speedSlider" min="0.5" max="10.0" value="2.0"/>
+        </ToolBar>
+    </bottom>
+</BorderPane>
